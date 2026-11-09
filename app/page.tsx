@@ -9,6 +9,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import Link from "next/link";
+import { RestoreSectionScroll, ScrollToSection } from "@/components/scroll-to-section";
 
 const projects = [
   {
@@ -170,10 +171,11 @@ function ProjectVisual({ type }: { type: string }) {
 export default function Home() {
   return (
     <main>
+      <RestoreSectionScroll />
       <header className="site-header">
-        <a className="wordmark radiant-mark" href="#top" aria-label="Back to top">RADIANT<span>.</span></a>
+        <ScrollToSection className="wordmark radiant-mark" targetId="top" ariaLabel="Back to top">RADIANT<span>.</span></ScrollToSection>
         <nav aria-label="Main navigation">
-          <a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a><a href="#contact">Contact</a>
+          <ScrollToSection targetId="work">Work</ScrollToSection><ScrollToSection targetId="experience">Experience</ScrollToSection><ScrollToSection targetId="about">About</ScrollToSection><ScrollToSection targetId="contact">Contact</ScrollToSection>
         </nav>
         <a className="availability" href="https://docs.google.com/document/d/1LDWV1vfstWrGs_t2m7-qW-b9hEDelzpZ5VYtjxWO1YI/edit?usp=sharing" target="_blank" rel="noreferrer"><span /> View CV</a>
       </header>
@@ -198,7 +200,7 @@ export default function Home() {
               turning conversational AI, financial workflows, and data-heavy products into reliable production systems.
             </p>
             <div className="hero-actions">
-              <a className="primary-button" href="#work">View selected work <ArrowDownRight size={18} /></a>
+              <ScrollToSection className="primary-button" targetId="work">View selected work <ArrowDownRight size={18} /></ScrollToSection>
               <a className="text-link" href="mailto:bukoyeabiodunisrael@gmail.com">Let&apos;s talk <ArrowUpRight size={17} /></a>
             </div>
           </div>

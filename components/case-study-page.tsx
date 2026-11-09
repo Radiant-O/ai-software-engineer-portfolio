@@ -2,13 +2,14 @@ import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import Link from "next/link";
 import type { CaseStudy } from "@/app/case-studies/data";
 import { SystemArchitecture, SystemDemonstration } from "@/components/system-diagrams";
+import { ScrollToSection } from "@/components/scroll-to-section";
 
 export function CaseStudyPage({ study }: { study: CaseStudy }) {
   return (
     <main className={`case-study ${study.accent}`}>
       <header className="case-nav">
         <Link className="wordmark radiant-mark" href="/">RADIANT<span>.</span></Link>
-        <Link className="back-link" href="/#work"><ArrowLeft size={16} /> All work</Link>
+        <ScrollToSection className="back-link" targetId="work"><ArrowLeft size={16} /> All work</ScrollToSection>
         <span>{study.category}</span>
       </header>
 
@@ -85,7 +86,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
               {link.label} <ArrowUpRight size={18} />
             </a>
           ))}
-          <Link href="/#contact">Start a conversation <ArrowUpRight size={18} /></Link>
+          <ScrollToSection targetId="contact">Start a conversation <ArrowUpRight size={18} /></ScrollToSection>
         </div>
       </section>
     </main>
