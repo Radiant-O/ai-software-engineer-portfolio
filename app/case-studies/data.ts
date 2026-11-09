@@ -177,7 +177,7 @@ export const pitupi: CaseStudy = {
       ],
     },
   ],
-  links: [{ label: "Visit Pitupi", href: "https://pitupi.com" }],
+  links: [{ label: "Visit Pitupi", href: "https://pitupi.co" }],
   closing: "The engineering challenge is turning flexible conversation into structured financial journeys where the application, not the model, owns every consequential action.",
 };
 
