@@ -3,7 +3,7 @@ import { CaseStudyPage } from "@/components/case-study-page";
 import { workscale } from "../data";
 
 export const metadata: Metadata = {
-  title: "WorkScale Case Study — Abiodun Bukoye",
+  title: "WorkScale Case Study | Abiodun Bukoye",
   description: workscale.summary,
 };
 

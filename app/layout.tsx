@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Radiant — Abiodun Bukoye · AI Software Engineer",
+    default: "Radiant | Abiodun Bukoye, AI Software Engineer",
     template: "%s",
   },
   description: "AI Software Engineer building reliable voice agents, financial platforms, and agentic products.",

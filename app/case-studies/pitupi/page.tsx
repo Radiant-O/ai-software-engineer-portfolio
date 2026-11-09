@@ -3,7 +3,7 @@ import { CaseStudyPage } from "@/components/case-study-page";
 import { pitupi } from "../data";
 
 export const metadata: Metadata = {
-  title: "Pitupi Case Study — Abiodun Bukoye",
+  title: "Pitupi Case Study | Abiodun Bukoye",
   description: pitupi.summary,
 };
 

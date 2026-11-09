@@ -72,7 +72,7 @@ const experience = [
   {
     company: "PITUPI",
     date: "2025–Present",
-    role: "Lead Software Engineer — AI & Backend",
+    role: "Lead Software Engineer, AI & Backend",
     detail:
       "Lead conversational AI, financial architecture, database design, provider integrations, security controls, and operational readiness.",
     proof: "Keep AI interpretation separate from ledger, balance, provider, and settlement authority.",
@@ -194,7 +194,7 @@ export default function Home() {
           </div>
           <div className="hero-intro">
             <p>
-              I&apos;m Abiodun Bukoye — most people know me as Radiant. I&apos;m an AI Software Engineer with 5+ years of experience
+              I&apos;m Abiodun Bukoye. Most people know me as Radiant. I&apos;m an AI Software Engineer with 5+ years of experience
               turning conversational AI, financial workflows, and data-heavy products into reliable production systems.
             </p>
             <div className="hero-actions">
@@ -274,7 +274,7 @@ export default function Home() {
         <div className="assisted-heading">
           <p className="eyebrow">05 / AI-ASSISTED ENGINEERING</p>
           <h2>Agents accelerate the loop.<span>Engineering judgment owns the result.</span></h2>
-          <p>I use coding agents to move faster across discovery, implementation, and debugging — then control quality with isolated changes, tests, review, and production evidence.</p>
+          <p>I use coding agents to move faster across discovery, implementation, and debugging. Quality is still controlled through isolated changes, tests, review, and production evidence.</p>
         </div>
         <div className="assisted-flow">
           <article><span>01</span><h3>Frame</h3><p>Turn product intent into bounded requirements and acceptance criteria.</p></article>

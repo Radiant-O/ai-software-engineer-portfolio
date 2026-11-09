@@ -143,7 +143,7 @@ function BaobabTrace() {
     <section className="system-demonstration trace-demonstration">
       <div className="demo-heading">
         <p className="eyebrow">DECISION TRACE</p>
-        <h2>See exactly why the guard changed—or kept—the prediction.</h2>
+        <h2>See exactly why the guard changed or kept the prediction.</h2>
         <p>Each example starts with the same inner-detector probability of 0.75 and a commit threshold of 0.50. Choose a transcript tail to inspect the evidence path.</p>
       </div>
       <div className="trace-shell">
