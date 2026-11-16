@@ -196,7 +196,7 @@ export default function Home() {
           </div>
           <div className="hero-intro">
             <p>
-              I&apos;m Abiodun Bukoye. Most people know me as Radiant. I&apos;m an AI Software Engineer with 5+ years of experience
+              I&apos;m Abiodun Bukoye. Most people know me as Radiant. I&apos;m an Applied AI &amp; Backend Engineer with 5+ years of experience
               turning conversational AI, financial workflows, and data-heavy products into reliable production systems.
             </p>
             <div className="hero-actions">
@@ -289,11 +289,11 @@ export default function Home() {
       </section>
 
       <section className="contact-section" id="contact">
-        <div className="contact-topline"><p className="eyebrow">06 / GET IN TOUCH</p><p><span /> OPEN TO AI AND SOFTWARE ENGINEERING ROLES</p></div>
+        <div className="contact-topline"><p className="eyebrow">06 / GET IN TOUCH</p><p><span /> OPEN TO APPLIED AI AND BACKEND ENGINEERING ROLES</p></div>
         <h2>Have a hard problem?</h2>
         <a className="contact-link" href="mailto:bukoyeabiodunisrael@gmail.com">Let&apos;s build it. <ArrowUpRight /></a>
         <div className="contact-footer">
-          <div><p>ABIODUN “RADIANT” BUKOYE</p><span>AI SOFTWARE ENGINEER · NIGERIA</span></div>
+          <div><p>ABIODUN “RADIANT” BUKOYE</p><span>APPLIED AI &amp; BACKEND ENGINEER · NIGERIA</span></div>
           <div className="social-links">
             <a href="https://github.com/Radiant-O" target="_blank" rel="noreferrer" aria-label="GitHub"><ArrowUpRight size={19} /> GitHub</a>
             <a href="https://linkedin.com/in/abiodun-bukoye-202aab217" target="_blank" rel="noreferrer" aria-label="LinkedIn"><ArrowUpRight size={19} /> LinkedIn</a>
