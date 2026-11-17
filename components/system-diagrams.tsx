@@ -132,9 +132,75 @@ function WorkScaleArchitecture() {
   );
 }
 
+function AgentSandboxArchitecture() {
+  return (
+    <div className="technical-diagram sandbox-architecture" role="img" aria-label="Agent Sandbox Runner architecture showing API and AI agent requests passing through one execution service into an isolated E2B microVM">
+      <div className="architecture-split">
+        <div className="architecture-layer">
+          <p>PUBLIC CLIENT</p>
+          <strong>React console</strong>
+          <span>Turnstile · visitor budget · SSE</span>
+        </div>
+        <div className="architecture-layer">
+          <p>AUTHENTICATED CLIENT</p>
+          <strong>Execution API</strong>
+          <span>API key · rate limit · schema</span>
+        </div>
+      </div>
+      <Arrow />
+      <div className="architecture-split">
+        <div className="architecture-layer ai-layer">
+          <p>BOUNDED AGENT</p>
+          <strong>OpenRouter + execute_python</strong>
+          <span>step · tool · token · time budgets</span>
+        </div>
+        <div className="architecture-layer boundary-layer">
+          <p>ONE EXECUTION AUTHORITY</p>
+          <strong>ExecutionService</strong>
+          <span>policy · concurrency · classification · persistence · cleanup</span>
+        </div>
+      </div>
+      <Arrow />
+      <div className="architecture-layer sandbox-core">
+        <p>UNTRUSTED COMPUTE</p>
+        <div><span>Fresh E2B microVM</span><span>Internet off</span><span>No app secrets</span><span>Hard timeout</span><span>Output capped</span><span>Always kill</span></div>
+      </div>
+      <div className="result-return"><span>SQLite records</span><i aria-hidden="true">←</i><span>Replay buffer</span><i aria-hidden="true">←</i><span>SSE audit console</span></div>
+      <p className="diagram-caption">The agent is a client, not an infrastructure authority. Every caller crosses the same validation, execution, and cleanup boundary.</p>
+    </div>
+  );
+}
+
+function OpportunityArchitecture() {
+  return (
+    <div className="technical-diagram opportunity-architecture" role="img" aria-label="Opportunity Reality Check architecture from job listing and preferences through extraction, evidence validation, deterministic rules, and evidence-backed output">
+      <div className="diagram-lane evidence-lane">
+        <div className="diagram-node source"><small>01 / INPUT</small><strong>Listing + preferences</strong><span>fixed job source · tab-local needs</span></div>
+        <Arrow />
+        <div className="diagram-node"><small>02 / EXTRACT</small><strong>Candidate claims</strong><span>metadata · clauses · optional LLM</span></div>
+        <Arrow />
+        <div className="diagram-node accent"><small>03 / VERIFY</small><strong>Evidence validator</strong><span>quote · source · polarity · injection</span></div>
+        <Arrow />
+        <div className="diagram-node"><small>04 / DECIDE</small><strong>Pure rule engine</strong><span>location · authorization · skills</span></div>
+      </div>
+      <div className="control-rail">
+        <span>exact quote required</span><span>full sentence checked</span><span>unknown stays unknown</span><span>rule ids</span><span>no persisted preferences</span>
+      </div>
+      <div className="decision-fork evidence-output">
+        <div><small>VERIFIED</small><strong>Evidence-backed findings</strong><span>next steps · employer question</span></div>
+        <span aria-hidden="true">OR</span>
+        <div><small>REJECTED / ABSENT</small><strong>Discarded or unknown</strong><span>reason remains visible</span></div>
+      </div>
+      <p className="diagram-caption">The optional model can suggest a claim. Deterministic validation and rules decide whether that claim can influence the user.</p>
+    </div>
+  );
+}
+
 export function SystemArchitecture({ slug }: { slug: string }) {
   if (slug === "baobab-turn") return <BaobabArchitecture />;
   if (slug === "pitupi") return <PitupiArchitecture />;
+  if (slug === "agent-sandbox-runner") return <AgentSandboxArchitecture />;
+  if (slug === "opportunity-reality-check") return <OpportunityArchitecture />;
   return <WorkScaleArchitecture />;
 }
 
@@ -218,8 +284,58 @@ function WorkScaleIncident() {
   );
 }
 
+function AgentSandboxLifecycle() {
+  const steps = [
+    ["01", "Queue", "Create a durable execution record and return 202 before the work begins."],
+    ["02", "Admit", "Acquire a concurrency slot after policy and spend checks pass."],
+    ["03", "Create", "Start one fresh E2B microVM with bounded retry and no network access."],
+    ["04", "Run", "Upload code, execute with a hard timeout, and stream capped output events."],
+    ["05", "Destroy", "Kill the sandbox in finally, including provider and user-code failure paths."],
+    ["06", "Classify", "Separate user errors, timeouts, provider failures, and interruptions."],
+    ["07", "Persist", "Store the result and cleanup evidence used by the API, agent, and console."],
+  ];
+  return (
+    <section className="system-demonstration journey-demonstration sandbox-lifecycle">
+      <div className="demo-heading">
+        <p className="eyebrow">EXECUTION LIFECYCLE</p>
+        <h2>Cleanup is part of the result, not an afterthought.</h2>
+        <p>The same lifecycle runs whether code came from a developer API request or the bounded AI agent.</p>
+      </div>
+      <div className="journey-flow">
+        {steps.map(([index, title, body]) => <article key={index}><span>{index}</span><h3>{title}</h3><p>{body}</p></article>)}
+      </div>
+    </section>
+  );
+}
+
+function OpportunityEvidenceFlow() {
+  const steps = [
+    ["01", "Locate", "Require the proposed quote to exist in the exact source field."],
+    ["02", "Expand", "Recover the smallest complete sentence around the quote."],
+    ["03", "Screen", "Reject instructions addressed to AI tools and distrust injected listings."],
+    ["04", "Cross-check", "Reclassify the full sentence to catch omitted negation and topic mismatch."],
+    ["05", "Verify", "Accept only canonical values whose meaning is supported by the source."],
+    ["06", "Decide", "Run deterministic location, authorization, relocation, and technical rules."],
+    ["07", "Explain", "Return rule ids, quotes, unknowns, discarded claims, and next steps."],
+  ];
+  return (
+    <section className="system-demonstration journey-demonstration evidence-demonstration">
+      <div className="demo-heading">
+        <p className="eyebrow">EVIDENCE VALIDATION TRACE</p>
+        <h2>A matching fragment is not enough.</h2>
+        <p>The validator reconstructs meaning before any extracted claim can affect a candidate&apos;s decision.</p>
+      </div>
+      <div className="journey-flow">
+        {steps.map(([index, title, body]) => <article key={index}><span>{index}</span><h3>{title}</h3><p>{body}</p></article>)}
+      </div>
+    </section>
+  );
+}
+
 export function SystemDemonstration({ slug }: { slug: string }) {
   if (slug === "baobab-turn") return <BaobabTrace />;
   if (slug === "pitupi") return <PitupiJourney />;
+  if (slug === "agent-sandbox-runner") return <AgentSandboxLifecycle />;
+  if (slug === "opportunity-reality-check") return <OpportunityEvidenceFlow />;
   return <WorkScaleIncident />;
 }

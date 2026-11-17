@@ -51,6 +51,32 @@ const projects = [
     visual: "workscale",
     href: "/case-studies/workscale/",
   },
+  {
+    number: "04",
+    label: "SECURE AGENT INFRASTRUCTURE",
+    title: "Agent Sandbox\nRunner",
+    summary:
+      "A secure execution plane for model-written Python, with bounded agents, fresh cloud microVMs, explicit failure ownership, and live lifecycle evidence.",
+    tags: ["Python", "FastAPI", "E2B", "SSE"],
+    metric: "Automated tests",
+    value: "124",
+    tone: "violet",
+    visual: "sandbox",
+    href: "/case-studies/agent-sandbox-runner/",
+  },
+  {
+    number: "05",
+    label: "EVIDENCE-BOUND DECISION SUPPORT",
+    title: "Opportunity\nReality Check",
+    summary:
+      "A job-listing decision tool where every location and sponsorship claim needs a source quote, and missing information stays explicitly unknown.",
+    tags: ["FastAPI", "Pydantic", "React", "Cloudflare"],
+    metric: "Test suites",
+    value: "199 tests",
+    tone: "cyan",
+    visual: "opportunity",
+    href: "/case-studies/opportunity-reality-check/",
+  },
 ];
 
 const experience = [
@@ -159,6 +185,30 @@ function ProjectVisual({ type }: { type: string }) {
     );
   }
 
+  if (type === "sandbox") {
+    return (
+      <div className="project-visual sandbox-visual" aria-hidden="true">
+        <div className="sandbox-command"><span>$</span> execute_python(&quot;sum(primes)&quot;)</div>
+        <div className="sandbox-boundary">
+          <small>FRESH MICROVM</small>
+          <div><span>CREATE</span><i>→</i><span>RUN</span><i>→</i><span>KILL</span></div>
+          <b>NETWORK OFF · OUTPUT CAPPED</b>
+        </div>
+        <div className="sandbox-status"><span /> cleanup_verified</div>
+      </div>
+    );
+  }
+
+  if (type === "opportunity") {
+    return (
+      <div className="project-visual evidence-visual" aria-hidden="true">
+        <div className="evidence-quote">“We are unable to sponsor visas at this time.”</div>
+        <div className="evidence-checks"><span>QUOTE ✓</span><span>SOURCE ✓</span><span>POLARITY ✓</span></div>
+        <div className="evidence-result"><small>AUTHORIZATION</small><strong>EXPLICITLY RESTRICTED</strong><b>rule A2 · verified evidence</b></div>
+      </div>
+    );
+  }
+
   return (
     <div className="project-visual gateway-visual" aria-hidden="true">
       <div className="request-nodes"><span>ASK</span><span>PLAN</span><span>ACT</span></div>
@@ -211,7 +261,7 @@ export default function Home() {
       <section className="work-section" id="work">
         <div className="section-heading">
           <div><p className="eyebrow">01 / SELECTED WORK</p><h2>Proof, not promises.</h2></div>
-          <p>Three systems that show how I reason about AI behavior, financial correctness, and reliable agent execution.</p>
+          <p>Five systems that show how I reason about AI behavior, evidence, security boundaries, financial correctness, and reliable execution.</p>
         </div>
 
         <div className="projects-grid">
