@@ -4,10 +4,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Radiant | Applied AI & Backend Engineer",
+    default: "Radiant | Software Engineer, Applied AI",
     template: "%s",
   },
-  description: "Applied AI & Backend Engineer building reliable voice agents, financial platforms, and agentic products.",
+  description: "Software Engineer focused on applied AI, building reliable voice agents, financial platforms, and agentic products.",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };
 

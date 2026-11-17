@@ -1,4 +1,4 @@
-# Radiant: Applied AI & Backend Engineer
+# Radiant: Software Engineer, Applied AI
 
 This is the public portfolio of Abiodun Bukoye, known professionally as Radiant. It is built to show how I think about AI systems, backend architecture, product engineering, reliability, and the decisions behind production software.
 
