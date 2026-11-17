@@ -45,6 +45,36 @@ The case study covers:
 
 My role on WorkScale is listed as Product Engineer. The product is still in progress and will be deployed soon.
 
+### Agent Sandbox Runner
+
+A secure code-execution service for AI agents, built around fresh E2B cloud microVMs and one policy-enforced execution path.
+
+The case study covers:
+
+- Why the API and bounded AI agent share the same `ExecutionService`
+- Fresh-sandbox isolation, network denial, output caps, hard timeouts, and verified cleanup
+- Failure classification that separates user code from provider and infrastructure faults
+- A real SSE lifecycle console with replay for late connections
+- Public-demo spend controls, proxy-safe visitor identity, CI, and operational evidence
+- 124 unit tests plus live integration tests
+
+Live demo: [agent-sandbox-runner.onrender.com](https://agent-sandbox-runner.onrender.com)
+
+### Opportunity Reality Check
+
+An evidence-bound decision tool for checking what real job listings say about location, remote work, relocation, and visa sponsorship.
+
+The case study covers:
+
+- Exact source quotes for every claim, with missing information kept explicitly unknown
+- Deterministic extraction plus an optional structured LLM extractor
+- A validator that checks source, full-sentence polarity, topic, and prompt injection
+- Pure rule ids for location, work authorization, relocation, and technical context
+- Privacy-first operation with no accounts, cookies, database, or persisted preferences
+- 163 backend tests, 36 frontend tests, and a 20-case adversarial regression set
+
+Live demo: [reality-check.radiantx.workers.dev](https://reality-check.radiantx.workers.dev)
+
 ## Engineering approach
 
 I use AI-assisted development to move faster, but the agents do not own the engineering decision. The workflow shown in the portfolio is:

@@ -5,6 +5,14 @@ import { SystemArchitecture, SystemDemonstration } from "@/components/system-dia
 import { ScrollToSection } from "@/components/scroll-to-section";
 
 export function CaseStudyPage({ study }: { study: CaseStudy }) {
+  const architectureTitles: Record<string, string> = {
+    "baobab-turn": "Prediction becomes a decision.",
+    pitupi: "Language becomes controlled execution.",
+    workscale: "Intent becomes an authorized action.",
+    "agent-sandbox-runner": "Generated code enters one controlled execution path.",
+    "opportunity-reality-check": "Untrusted text becomes evidence-bound findings.",
+  };
+
   return (
     <main className={`case-study ${study.accent}`}>
       <header className="case-nav">
@@ -45,7 +53,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
       <section className="case-architecture">
         <div className="case-section-title">
           <p className="eyebrow">SYSTEM ARCHITECTURE</p>
-          <h2>{study.slug === "baobab-turn" ? "Prediction becomes a decision." : study.slug === "pitupi" ? "Language becomes controlled execution." : "Intent becomes an authorized action."}</h2>
+          <h2>{architectureTitles[study.slug]}</h2>
         </div>
         <SystemArchitecture slug={study.slug} />
       </section>

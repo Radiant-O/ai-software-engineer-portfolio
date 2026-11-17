@@ -24,7 +24,7 @@ export type CaseStudy = {
   summary: string;
   role: string;
   stage: string;
-  accent: "acid" | "orange" | "blue";
+  accent: "acid" | "orange" | "blue" | "violet" | "cyan";
   stack: string[];
   metrics: CaseStudyMetric[];
   architecture: string[];
@@ -259,4 +259,167 @@ export const workscale: CaseStudy = {
   closing: "Useful AI is not just a good answer. It is a controlled, observable, recoverable action.",
 };
 
-export const caseStudies = [baobabTurn, pitupi, workscale];
+export const agentSandboxRunner: CaseStudy = {
+  slug: "agent-sandbox-runner",
+  index: "04",
+  category: "SECURE AGENT INFRASTRUCTURE",
+  title: "Agent Sandbox Runner",
+  headline: "Let the agent write code. Never let it escape the boundary.",
+  summary:
+    "A secure execution plane for model-written Python, with one policy path for API and agent callers, a fresh cloud microVM per run, explicit failure ownership, and a live audit console.",
+  role: "Sole Engineer",
+  stage: "Live public demo",
+  accent: "violet",
+  stack: ["Python", "FastAPI", "E2B", "React", "TypeScript", "SSE", "SQLite", "Docker"],
+  metrics: [
+    { value: "124", label: "Unit tests", note: "Plus live integration tests" },
+    { value: "~600ms", label: "Sandbox boot", note: "Measured live run average" },
+    { value: "1", label: "Fresh microVM per run", note: "Always destroyed in cleanup" },
+    { value: "6 / 6", label: "Sandboxes killed", note: "Zero cleanup failures in the measured run" },
+  ],
+  architecture: [
+    "API and agent requests enter the same policy-enforced ExecutionService.",
+    "Every run receives a fresh E2B microVM with internet access disabled by default.",
+    "Lifecycle events flow through a replay buffer to the public console over SSE.",
+    "Structured records preserve status, failure ownership, timing, and cleanup evidence.",
+  ],
+  sections: [
+    {
+      eyebrow: "TRUST BOUNDARY",
+      title: "One path from generated code to a sandbox.",
+      intro:
+        "The agent never talks to E2B directly. It is a bounded client of the same ExecutionService used by the API, so policy, concurrency, classification, persistence, and cleanup cannot be bypassed.",
+      items: [
+        { title: "Fresh isolation", body: "Each run creates a new cloud microVM. Sessions are never shared between users or agent runs." },
+        { title: "Network denied", body: "Sandbox internet access is off by default, and application secrets are never copied into the runtime." },
+        { title: "Bounded resources", body: "Wall-clock limits, capped output, concurrency control, and sandbox lifetime backstops constrain every execution." },
+        { title: "Cleanup in finally", body: "The service attempts destruction on every path and records the outcome instead of treating process exit as proof of cleanup." },
+      ],
+    },
+    {
+      eyebrow: "FAILURE OWNERSHIP",
+      title: "A timeout is not always the user's fault.",
+      intro:
+        "Provider exceptions overlap in ways that can mislabel an unavailable sandbox as slow user code. The service classifies the most specific infrastructure errors before generic timeouts.",
+      items: [
+        { title: "User code error", body: "A completed process with a failing exit belongs to the submitted program and is reported with bounded stderr." },
+        { title: "Execution timeout", body: "Only an active program that exceeds its allotted runtime is classified as a user-code timeout." },
+        { title: "Sandbox unavailable", body: "Creation, reachability, and provider failures remain infrastructure errors instead of being blamed on the code." },
+        { title: "Stored evidence", body: "Status, failure kind, timings, output metadata, and cleanup state are persisted for verification and debugging." },
+      ],
+    },
+    {
+      eyebrow: "BOUNDED AGENT",
+      title: "The model can propose and inspect. The service remains authoritative.",
+      intro:
+        "The agent gets one tool, execute_python, and a finite budget for steps, tool calls, tokens, and wall-clock time. Success comes from stored execution records, not the model's narration.",
+      items: [
+        { title: "One typed tool", body: "Invalid tool arguments return structured feedback so the model can repair a request without escaping the contract." },
+        { title: "Pre-spend policy", body: "Requests are validated before an LLM or sandbox provider is paid." },
+        { title: "Bounded loop", body: "Step, tool, time, and token ceilings prevent an open-ended autonomous run." },
+        { title: "Verified completion", body: "The final answer can reference only results produced by the shared execution path and stored by the application." },
+      ],
+    },
+    {
+      eyebrow: "PUBLIC OPERATIONS",
+      title: "A real demo with controlled cost and an honest trace.",
+      intro:
+        "The public console streams actual sandbox lifecycle events. Layered gates keep a no-sign-up demo available without turning provider credits into an unbounded public resource.",
+      items: [
+        { title: "Live event stream", body: "Sandbox creation, upload, stdout, stderr, exit, and destruction events arrive through SSE with replay for late connections." },
+        { title: "Spend gates", body: "Policy checks, Turnstile, visitor limits, a daily budget, recorded-run replay, and a provider credit limit contain cost." },
+        { title: "Proxy-safe identity", body: "Visitor limits trust Cloudflare's connecting IP and use the proxy-controlled end of forwarded chains." },
+        { title: "Observable delivery", body: "Structured logs, lifecycle metrics, CI checks, Docker builds, Render, Cloudflare, and uptime monitoring close the loop." },
+      ],
+    },
+  ],
+  links: [
+    { label: "Live demo", href: "https://agent-sandbox-runner.onrender.com" },
+    { label: "GitHub", href: "https://github.com/Radiant-O/agent-sandbox-runner" },
+  ],
+  closing: "Generated code is untrusted input. The useful engineering begins at the boundary around it.",
+};
+
+export const opportunityRealityCheck: CaseStudy = {
+  slug: "opportunity-reality-check",
+  index: "05",
+  category: "EVIDENCE-BOUND DECISION SUPPORT",
+  title: "Opportunity Reality Check",
+  headline: "If the listing does not say it, the product should not guess.",
+  summary:
+    "A decision-support tool that checks real job listings against location, work arrangement, relocation, and sponsorship needs, with a source quote behind every claim and unknowns kept explicit.",
+  role: "Sole Engineer",
+  stage: "Live public demo",
+  accent: "cyan",
+  stack: ["Python", "FastAPI", "Pydantic", "React", "TypeScript", "Vite", "Cloudflare", "Docker"],
+  metrics: [
+    { value: "163", label: "Backend tests", note: "All external I/O mocked" },
+    { value: "36", label: "Frontend tests", note: "Type checks and production build in CI" },
+    { value: "20", label: "Adversarial eval cases", note: "Regression gate, not an accuracy estimate" },
+    { value: "$0", label: "Monthly demo cost", note: "Public LLM extraction disabled" },
+  ],
+  architecture: [
+    "The React client sends a job id and tab-local preferences to a FastAPI API.",
+    "Listings are fetched from a fixed read-only host, normalized, and extracted into quoted claims.",
+    "Every deterministic or optional LLM claim must survive the same evidence validator.",
+    "Pure rules turn verified claims into findings, next steps, and an employer question draft.",
+  ],
+  sections: [
+    {
+      eyebrow: "PRODUCT PRINCIPLE",
+      title: "Unknown is a first-class result, not a hidden no.",
+      intro:
+        "International candidates often need facts the listing never states. The system keeps silence, explicit restriction, and explicit support separate throughout the API and interface.",
+      items: [
+        { title: "Quotes, not guesses", body: "Every displayed claim includes the exact sentence and source field that supports it." },
+        { title: "Rules, not scores", body: "Findings use stable rule ids and statuses instead of a confidence-looking match percentage." },
+        { title: "No legal determination", body: "The authorization view reports only what the listing establishes and flags what still needs clarification." },
+        { title: "End in action", body: "Ranked next steps and a copyable employer question help the user resolve missing information." },
+      ],
+    },
+    {
+      eyebrow: "EVIDENCE PIPELINE",
+      title: "The AI proposes. Deterministic code decides what can be believed.",
+      intro:
+        "Metadata, clause-level rules, and an optional structured LLM extractor all produce candidate claims. None reaches the rules engine until the validator proves that its quote and meaning agree with the listing.",
+      items: [
+        { title: "Exact-source evidence", body: "Quotes are normalized, located in the named field, and expanded to the smallest complete sentence." },
+        { title: "Polarity cross-check", body: "The full sentence is classified again so a positive fragment cannot hide words such as not or unable." },
+        { title: "Injection handling", body: "Text aimed at AI tools is rejected, and LLM claims from an injected listing are discarded." },
+        { title: "Visible rejection", body: "Discarded claims remain inspectable with a reason instead of disappearing from the audit trail." },
+      ],
+    },
+    {
+      eyebrow: "RULE ENGINE",
+      title: "Compatibility is derived only from verified facts.",
+      intro:
+        "Pure Python rules combine verified listing claims with request-only preferences. Changing preferences reruns cheap rules without extracting the listing or paying for another model call.",
+      items: [
+        { title: "Location", body: "Work arrangement, country, remote region, time zone, and relocation rules distinguish conflict from uncertainty." },
+        { title: "Authorization", body: "Supported, restricted, case-by-case, existing authorization, citizenship, and silence remain distinct states." },
+        { title: "Technical context", body: "Normalized skills show supporting alignment without being combined with location or authorization verdicts." },
+        { title: "Layered caches", body: "Job details and extraction are cached per listing; analysis is cached separately by listing and preferences." },
+      ],
+    },
+    {
+      eyebrow: "ADVERSARIAL QUALITY",
+      title: "The dangerous edge cases became tests.",
+      intro:
+        "The review targeted the ways evidence systems fail: dropped negations, prompt injection, perk false positives, ambiguous geography, closed jobs, and spoofed proxy headers.",
+      items: [
+        { title: "Negation traps", body: "Cases such as no longer sponsor and relocation assistance is not available are pinned as regressions." },
+        { title: "False-positive traps", body: "Company-sponsored conferences, visa-free perks, salary, company size, and reputation never imply sponsorship." },
+        { title: "Honest evaluation", body: "The 20-case set reports perfect regression results but is explicitly not presented as an independent accuracy estimate." },
+        { title: "Privacy by default", body: "There are no accounts, cookies, or preference storage, and a test asserts that preferences never enter logs." },
+      ],
+    },
+  ],
+  links: [
+    { label: "Live demo", href: "https://reality-check.radiantx.workers.dev" },
+    { label: "API docs", href: "https://opportunity-reality-check.onrender.com/docs" },
+    { label: "GitHub", href: "https://github.com/Radiant-O/opportunity-reality-check" },
+  ],
+  closing: "A trustworthy answer is not the most confident one. It is the one that can show its evidence and admit what remains unknown.",
+};
+
+export const caseStudies = [baobabTurn, pitupi, workscale, agentSandboxRunner, opportunityRealityCheck];
